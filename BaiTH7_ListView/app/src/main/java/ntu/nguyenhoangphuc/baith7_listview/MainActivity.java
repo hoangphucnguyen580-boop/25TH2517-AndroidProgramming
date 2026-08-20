@@ -1,8 +1,11 @@
 package ntu.nguyenhoangphuc.baith7_listview;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<String> dsTenTinhThanhVN; //Khai báo
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Hiển thị dữ liệu lên ListView
         //Cân có dữ liệu
-        ArrayList<String> dsTenTinhThanhVN; //Khai báo
+
         dsTenTinhThanhVN = new ArrayList<String>();
 
         dsTenTinhThanhVN.add("Hà Nội");
@@ -42,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
         //Gắn
         lvTenTinhThanh.setAdapter(adapterTinhThanh);
         //Lắng nghe và xử lý sự khiện người dùng tương tác
+        lvTenTinhThanh.setOnItemClickListener(BoLangNghevaXL);
 
     }
+
+    //Tạo bộ lắng nghe và xử lý sự kiện OnItemClick
+    AdapterView.OnItemClickListener BoLangNghevaXL = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //Code xử lý
+            String strTenTinhChon = dsTenTinhThanhVN.get(position);
+            Toast.makeText(MainActivity.this, strTenTinhChon, Toast.LENGTH_LONG).show();
+        }
+    };
 }
